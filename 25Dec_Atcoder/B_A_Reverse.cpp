@@ -114,32 +114,30 @@ void _print(map<T, V> v)
 int main()
 {
 #ifndef ONLINE_JUDGE
-    // freopen("error.txt", "w", stderr);
+    freopen("error.txt", "w", stderr);
 #endif
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
-    int t;
-    cin >> t;
-    while (t--)
+    int l, r;
+    cin >> l >> r;
+    string alpha;
+    cin >> alpha;
+    string beta;
+    l--;
+    r--;
+    for (int i = l; i <=r; ++i)
     {
-        int n;
-        cin >> n;
-        vector<long long> vt(n);
-        map<long long, int> mp;
-        for (int i = 0; i < n; ++i)
-        {
-            cin >> vt[i];
-            mp[vt[i]]++;
-        }
-        long long final_answer = 0;
-        sort(vt.begin(), vt.end());
-        for (int i = 0; i < n; ++i)
-        {
-            mp[vt[i]]--;
-            int gamma = mp[vt[i]] + mp[vt[i] + 1] + mp[vt[i] + 2];
-            final_answer += (gamma * (1LL) * (gamma - 1)) / 2;
-        }
-        cout << final_answer << "\n";
+        beta.push_back(alpha[i]);
+    }
+    reverse(beta.begin(), beta.end());
+    for (int i = 0; i < l; ++i)
+    {
+        cout << alpha[i];
+    }
+    cout << beta;
+    for (int i = r + 1; i < alpha.length(); ++i)
+    {
+        cout << alpha[i];
     }
 }
