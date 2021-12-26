@@ -111,6 +111,31 @@ void _print(map<T, V> v)
 }
 
 /*###############################################################################################################################################*/
+void dfs(long long pos,long long n,long long sum,long long target,long long &answer,vector<vector<long long>> &vt)
+{
+    if(pos==n)
+    {
+        if(sum==target)
+        {
+            answer++;
+        }
+        return ;
+    }
+    for(auto x:vt[pos])
+    {
+        if(sum>target/x)
+        {
+            continue;
+        }
+        else
+        {
+            if(target%x==0)
+            {
+                dfs(pos+1,n,sum*(1LL)*x,target,answer,vt);
+            }
+        }
+    }
+}
 int main()
 {
 #ifndef ONLINE_JUDGE
@@ -136,4 +161,7 @@ int main()
         }
         vt.push_back(temp);
     }
+    long long final_answer=0;
+    dfs(0,n,1,target,final_answer,vt);
+    cout<<final_answer<<"\n";
 }
