@@ -111,11 +111,11 @@ void _print(map<T, V> v)
 }
 
 /*###############################################################################################################################################*/
-void dfs(long long pos,long long n,long long sum,long long target,long long &answer,vector<vector<long long>> &vt)
+void dfs(long long pos,long long n,long long sum,long long &answer,vector<vector<long long>> &vt)
 {
     if(pos==n)
     {
-        if(sum==target)
+        if(sum==1)
         {
             answer++;
         }
@@ -123,16 +123,9 @@ void dfs(long long pos,long long n,long long sum,long long target,long long &ans
     }
     for(auto x:vt[pos])
     {
-        if(sum>target/x)
+        if(sum%x==0)
         {
-            continue;
-        }
-        else
-        {
-            if(target%x==0)
-            {
-                dfs(pos+1,n,sum*(1LL)*x,target,answer,vt);
-            }
+            dfs(pos+1,n,sum/x,answer,vt);
         }
     }
 }
@@ -162,6 +155,6 @@ int main()
         vt.push_back(temp);
     }
     long long final_answer=0;
-    dfs(0,n,1,target,final_answer,vt);
+    dfs(0,n,target,final_answer,vt);
     cout<<final_answer<<"\n";
 }
