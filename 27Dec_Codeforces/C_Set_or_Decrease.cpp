@@ -134,14 +134,28 @@ int main()
             cin >> vt[i];
             sum += vt[i];
         }
-        long long answer=0;
+        long long answer = 0;
         if (sum <= k)
         {
             cout << "0\n";
         }
         else
-        {   
-            
+        {
+            sort(vt.begin(), vt.end());
+            long long answer1 = 0;
+            long long temp = vt[0];
+            while ((temp *(1LL)* n) <= k)
+            {
+                temp--;
+                answer1++;
+            }
+            for (int i = 1; i < n; ++i)
+            {
+                if (vt[i] != temp)
+                {
+                    answer++;
+                }
+            }
         }
     }
 }
