@@ -125,57 +125,36 @@ int main()
     {
         int n;
         cin >> n;
-        vector<double> vt(n);
-        double answer = 1000000000;
+        vector<long long> vt(n);
+        long long answer = 1000000000;
         for (int i = 0; i < n; ++i)
         {
             cin >> vt[i];
         }
-        vector<double> common_diff;
-        // for (int i = -100; i <= 100; ++i)
-        // {
-        //     common_diff.push_back(i);
-        // }
-        common_diff.push_back(0);
-        for (int i = 0; i < n; ++i)
+        if (n == 1)
         {
-            for (int j = i + 1; j < n; ++j)
-            {
-                double size = j - i;
-                double alpha = (double)((vt[j] - vt[i]) / size);
-                common_diff.push_back(alpha);
-            }
+            cout << "0\n";
         }
-        for (int i = 0; i < n; ++i)
+        else
         {
-            double element = vt[i];
-            for (int j = 0; j < common_diff.size(); ++j)
+            for (int i = 0; i < n; ++i)
             {
-                double diff = common_diff[j];
-                double prev = element;
-                double element_answer = 0;
-                for (int k = i - 1; k >= 0; --k)
+                for (int j = i + 1; j < n; ++j)
                 {
-                    double gamma = prev - diff;
-                    if (vt[k] != gamma)
+                    long long first = vt[j] - vt[i];
+                    long long second = j - i;
+                    long long count = 0;
+                    for (int k = 0; k < n; ++k)
                     {
-                        element_answer++;
+                        if ((vt[k] * (1LL) * second) != ((vt[i] * (1LL) * (second)) + (k - i) * (1LL) * (first)))
+                        {
+                            count++;
+                        }
                     }
-                    prev = gamma;
+                    answer = min(answer, count);
                 }
-                prev = element;
-                for (int k = i + 1; k < n; ++k)
-                {
-                    double gamma = prev + diff;
-                    if (vt[k] != gamma)
-                    {
-                        element_answer++;
-                    }
-                    prev = gamma;
-                }
-                answer = min(answer, element_answer);
             }
+            cout << answer << "\n";
         }
-        cout << answer << "\n";
     }
 }
